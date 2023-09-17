@@ -1,49 +1,51 @@
-import { useState, useEffect } from "react";
-import SearchIcon from "./search.svg";
-import "./App.css";
+import { useEffect, useState } from "react";
+import "./styles.css";
 import MovieCard from "./MovieCard.jsx";
+import searchIcon from "./search.svg";
 
-//45ba8dc => API Key
-
-const API_URL = "http://www.omdbapi.com?apikey=45ba8dc";
+const API_URL = "https://www.omdbapi.com?apikey=45ba8dc";
 
 const App = () => {
   const [movies, setMovies] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
+  // Fetch movies
   const searchMovies = async (title) => {
     const response = await fetch(`${API_URL}&s=${title}`);
     const data = await response.json();
     setMovies(data.Search);
   };
-
   useEffect(() => {
     searchMovies("Superman");
   }, []);
   return (
     <div className="container">
-      <div className="text-center">
-        <h1 className="text-warning">Movie Land</h1>
+      <div className="text-center text-warning my-5">
+        <h1>Movie Land</h1>
       </div>
       {/* Row 1 */}
-      <div className="row justify-content-center mt-4">
-        <div className="col-md-6">
-          <div className="d-flex">
-            <input
-              id="search"
-              type="text"
-              className="form-control"
-              placeholder="Search your favorite movies"
-              value={searchTerm}
-              onChange={(e) => { setSearchTerm(e.target.value) }}></input>
-            <img className="search-icon" src={SearchIcon} alt="searchIcon" onClick={() => searchMovies(searchTerm)} />
-          </div>
+      <div className="row justify-content-center">
+        <div className="col-md-6 d-flex">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Search your favorite movies"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+            }}
+          />
+          <img
+            src={searchIcon}
+            onClick={() => {
+              searchMovies(searchTerm);
+            }}
+            className="search-icon"
+            alt="Search Icon"
+          />
         </div>
-
-      </div>
-      {/* Row 2 */}
-      {
-        movies?.length > 0 ? (
-          <div className="row justify-content-center">
+        {/* Row 2 */}
+        {movies?.length > 0 ? (
+          <div className="row justify-content-center my-5">
             {movies.map((movie, index) => (
               <MovieCard movie={movie} key={index} />
             ))}
@@ -52,8 +54,8 @@ const App = () => {
           <div className="alert alert-danger mt-4" role="alert">
             <strong>No movies available!</strong>
           </div>
-        )
-      }
+        )}
+      </div>
     </div>
   );
 };
