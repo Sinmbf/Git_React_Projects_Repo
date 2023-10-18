@@ -15,7 +15,7 @@ const cors = require("cors");
 // app.options(cors());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://login-signup-frontend-mu.vercel.app",
     optionsSuccessStatus: 200, //some legacy browsers (IE11, various SmartTVs) choke on 204
   })
 );
