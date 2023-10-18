@@ -6,7 +6,7 @@ const Login = ({ displayAlert }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const host = "https://login-signup-backend-cyan.vercel.app";
+  const host = "https://login-signup-backend-ws4o.onrender.com";
   // Helper function to handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();

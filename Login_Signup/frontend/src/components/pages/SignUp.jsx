@@ -15,7 +15,7 @@ const SignUp = ({ displayAlert }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = credentials;
-    const host = "https://login-signup-backend-cyan.vercel.app";
+    const host = "https://login-signup-backend-ws4o.onrender.com";
     const url = `${host}/createuser`;
     const response = await fetch(url, {
       method: "POST",
