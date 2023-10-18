@@ -12,7 +12,7 @@ const fetchUser = require("./middleware/fetchUser");
 const cors = require("cors");
 
 // For fixing cors issue
-app.options("*", cors());
+app.options("/login", cors());
 app.use(
   cors({
     origin: "https://login-signup-frontend-mu.vercel.app",
