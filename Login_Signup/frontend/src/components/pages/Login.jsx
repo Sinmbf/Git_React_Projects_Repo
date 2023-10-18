@@ -6,7 +6,7 @@ const Login = ({ displayAlert }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  const host = "http://localhost:5000";
+  const host = "https://login-signup-backend-cyan.vercel.app";
   // Helper function to handle Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
