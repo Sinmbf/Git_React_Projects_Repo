@@ -17,7 +17,7 @@ const fixCors = require("./middleware/cors");
 app.use((req, res, next) => {
   res.setHeader(
     "Access-Control-Allow-Origin",
-    "https://main--warm-alfajores-2d3392.netlify.app"
+    "https://warm-alfajores-2d3392.netlify.app"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
