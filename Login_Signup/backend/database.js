@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
-const mongoURI = "mongodb://127.0.0.1/login-signup";
+const mongoURI =
+  "mongodb+srv://sinmbf:sinmbflost@lost.gmlqtoc.mongodb.net/?retryWrites=true&w=majority";
 
-const connectToMongo = async () => {
-  try {
-    const response = await mongoose.connect(mongoURI);
-    console.log("Connected to MongoDB successfully");
-  } catch (error) {
-    console.log(error);
-  }
+const connectToMongo = () => {
+  mongoose
+    .connect(mongoURI)
+    .then(() => console.log("Connected to MongoDb successfully"))
+    .catch((error) => console.log(error));
 };
 
 module.exports = connectToMongo;
