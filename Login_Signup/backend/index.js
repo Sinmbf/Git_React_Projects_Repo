@@ -10,15 +10,21 @@ const jwt = require("jsonwebtoken");
 const JWT_SECRET = "SinmbfLost";
 const fetchUser = require("./middleware/fetchUser");
 const cors = require("cors");
+const fixCors = require("./middleware/cors");
 
 // For fixing cors issue
-app.options("/login", cors());
-app.use(
-  cors({
-    origin: "https://login-signup-frontend-mu.vercel.app",
-    optionsSuccessStatus: 200, //some legacy browsers (IE11, various SmartTVs) choke on 204
-  })
-);
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+  );
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 // For parsing the request body
 app.use(express.json());
 
