@@ -5,7 +5,7 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// ROUTE 1; Create a new user using POST : /createuser. No login required.
+// ROUTE 1; Create a new user using POST : /api/auth/createuser. No login required.
 router.post(
   "/createuser",
   [
@@ -58,7 +58,7 @@ router.post(
   }
 );
 
-// ROUTE 2: Authenticate the user using POST : /login. No login required.
+// ROUTE 2: Authenticate the user using POST : /api/auth/login. No login required.
 router.post(
   "/login",
   [
