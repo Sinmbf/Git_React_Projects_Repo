@@ -15,7 +15,7 @@ const SignUp = ({ displayAlert }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, email, password } = credentials;
-    const host = "https://login-signup-backend-m7wz.onrender.com";
+    const host = "https://login-signup-backend-m7wz.onrender.com/api/auth";
     const url = `${host}/createuser`;
     const response = await fetch(url, {
       method: "POST",
