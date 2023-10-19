@@ -11,26 +11,26 @@ const jwt = require("jsonwebtoken");
 app.use(express.json());
 
 // Set middleware of CORS
-// app.use((req, res, next) => {
-//     res.setHeader(
-//       "Access-Control-Allow-Origin",
-//       "https://your-frontend.com"
-//     );
-//     res.setHeader(
-//       "Access-Control-Allow-Methods",
-//       "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-//     );
-//     res.setHeader(
-//       "Access-Control-Allow-Headers",
-//       "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
-//     );
-//     res.setHeader("Access-Control-Allow-Credentials", true);
-//     res.setHeader("Access-Control-Allow-Private-Network", true);
-//     //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-//     res.setHeader("Access-Control-Max-Age", 7200);
+app.use((req, res, next) => {
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://login-signup-frontend.onrender.com"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+  );
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+  );
+  res.setHeader("Access-Control-Allow-Credentials", true);
+  res.setHeader("Access-Control-Allow-Private-Network", true);
+  //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+  res.setHeader("Access-Control-Max-Age", 7200);
 
-//     next();
-//   });
+  next();
+});
 
 // ROUTE 1; Create a new user using POST : /createuser. No login required.
 app.post(
