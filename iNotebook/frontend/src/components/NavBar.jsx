@@ -28,10 +28,7 @@ const NavBar = ({ displayAlert }) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li
-              className="nav-item"
-              onClick={() => displayAlert("Hello", "success")}
-            >
+            <li className="nav-item">
               <NavLink className="nav-link" aria-current="page" to="/">
                 Home
               </NavLink>

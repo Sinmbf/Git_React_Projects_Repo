@@ -1,11 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useState} from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ displayAlert }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  // useEffect(() => {
+  //   localStorage.getItem("auth-token") && localStorage.removeItem("auth-token");
+  //   navigate("/login");
+  // }, []);
   // Helper function to handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();

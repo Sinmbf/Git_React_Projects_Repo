@@ -6,7 +6,7 @@
     position: relative;
   }
   
-  form {
+  .form {
     display: flex;
     min-height: 22rem;
     flex-direction: column;
@@ -16,7 +16,7 @@
     z-index: 1;
   }
   
-  form::after {
+  .form::after {
     content: "";
     position: absolute;
     z-index: -1;
@@ -44,5 +44,9 @@
   .btn-primary:disabled {
     background: rgb(141, 54, 212);
     border: 2px solid rgb(141, 54, 212);
+  }
+
+  i{
+    cursor:pointer;
   }
   

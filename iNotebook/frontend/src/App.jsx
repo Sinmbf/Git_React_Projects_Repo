@@ -8,6 +8,7 @@ import SignUp from "./components/pages/Signup";
 import Footer from "./components/Footer";
 import Alert from "./components/Alert";
 import { useState } from "react";
+import NoteState from "./context/NoteState";
 
 function App() {
   const [alert, setAlert] = useState({ message: "", type: "" });
@@ -19,28 +20,30 @@ function App() {
   };
   return (
     <>
-      {/* Navigation Bar */}
-      <NavBar displayAlert={displayAlert} />
+      <NoteState>
+        {/* Navigation Bar */}
+        <NavBar displayAlert={displayAlert} />
 
-      {/* Available Routes */}
-      <div className="main">
-        {/* Alert */}
-        <Alert {...alert} />
-        <Routes>
-          <Route path="/" element={<Home displayAlert={displayAlert} />} />
-          <Route path="/about" element={<About />} />
-          <Route
-            path="/login"
-            element={<Login displayAlert={displayAlert} />}
-          />
-          <Route
-            path="/signup"
-            element={<SignUp displayAlert={displayAlert} />}
-          />
-        </Routes>
-      </div>
-      {/* Footer */}
-      <Footer />
+        {/* Available Routes */}
+        <div className="main">
+          {/* Alert */}
+          <Alert {...alert} />
+          <Routes>
+            <Route path="/" element={<Home displayAlert={displayAlert} />} />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/login"
+              element={<Login displayAlert={displayAlert} />}
+            />
+            <Route
+              path="/signup"
+              element={<SignUp displayAlert={displayAlert} />}
+            />
+          </Routes>
+        </div>
+        {/* Footer */}
+        <Footer />
+      </NoteState>
     </>
   );
 }
