@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const NavBar = ({ displayAlert }) => {
+  const navigate = useNavigate();
+  // Helper function to handle logout
+  const handleLogout = () => {
+    localStorage.removeItem("auth-token");
+    displayAlert("Logged out successfully", "danger");
+    navigate("/login");
+  };
   return (
     <nav className="navbar navbar-expand-lg bg-black" data-bs-theme="dark">
       <div className="container-fluid">
@@ -35,6 +42,30 @@ const NavBar = ({ displayAlert }) => {
               </NavLink>
             </li>
           </ul>
+          {!localStorage.getItem("auth-token") ? (
+            <div>
+              <NavLink
+                to="/login"
+                className="btn btn-outline-info"
+                tabIndex="-1"
+                role="button"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                to="/signup"
+                className="btn btn-outline-danger mx-2"
+                tabIndex="-1"
+                role="button"
+              >
+                Sign Up
+              </NavLink>
+            </div>
+          ) : (
+            <button className="btn btn-outline-danger" onClick={handleLogout}>
+              Logout
+            </button>
+          )}
         </div>
       </div>
     </nav>

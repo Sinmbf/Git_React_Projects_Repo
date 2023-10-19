@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ displayAlert }) => {
   const [credentials, setCredentials] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   // Helper function to handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,9 +19,19 @@ const Login = ({ displayAlert }) => {
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ email, password }),
       });
-      const json = response.json();
-      console.log(json);
+      const json = await response.json();
+      if (json.error) {
+        setError(json.error);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+        return;
+      }
+      localStorage.setItem("auth-token", json.authToken);
+      displayAlert("Logged in successfully", "success");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
@@ -57,7 +70,9 @@ const Login = ({ displayAlert }) => {
               id="emailHelp"
               className="form-text text-danger"
               style={{ height: ".6rem" }}
-            ></div>
+            >
+              {error && error}
+            </div>
           </div>
           {/* Password */}
           <div className="mb-3">
@@ -77,7 +92,9 @@ const Login = ({ displayAlert }) => {
               id="passwordHelp"
               className="form-text text-danger"
               style={{ height: ".6rem" }}
-            ></div>
+            >
+              {error && error}
+            </div>
           </div>
 
           <button type="submit" className="btn btn-primary">

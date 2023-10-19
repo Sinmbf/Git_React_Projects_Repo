@@ -11,40 +11,44 @@ const SignUp = ({ displayAlert }) => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  // Helper function to handle Submit
+
+  // Helper function to handle submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Get user details from the form submitted
     const { name, email, password } = credentials;
-    const host = "https://login-signup-backend-m7wz.onrender.com/api/auth";
-    const url = `${host}/createuser`;
-    const response = await fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
-    const json = await response.json();
-    if (json.error) {
-      setError(json.error);
-      setTimeout(() => {
-        setError("");
-      }, 3000);
-      return;
+    try {
+      // Create a new account using backend server
+      const url =
+        "https://login-signup-backend-m7wz.onrender.com/api/auth/createuser";
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name, email, password }),
+      });
+      const json = await response.json();
+      if (json.error) {
+        setError(json.error);
+        setTimeout(() => {
+          setError("");
+        }, 3000);
+        return;
+      }
+      // If no errors then redirect to login page
+      displayAlert("Welcome our new user " + name, "success");
+
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
     }
-    displayAlert(`Welcome ${name}!`, "success");
-    navigate("/login");
   };
   // Helper function to handle change
   const handleChange = (e) => {
-    setCredentials((currentCredentials) => ({
-      ...currentCredentials,
-      [e.target.name]: e.target.value,
-    }));
+    setCredentials((currentCredentials) => {
+      return { ...currentCredentials, [e.target.name]: e.target.value };
+    });
   };
   return (
     <div className="container">
