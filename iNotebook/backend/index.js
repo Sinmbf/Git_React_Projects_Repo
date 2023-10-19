@@ -3,18 +3,25 @@ const connectToMongo = require("./database");
 connectToMongo();
 const app = express();
 const port = 5000;
+const cors = require("cors");
 
 // To fix the cors issue
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
 // Set middleware of CORS
 // app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "");
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:5173");
 //   res.setHeader(
 //     "Access-Control-Allow-Methods",
 //     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
 //   );
 //   res.setHeader(
 //     "Access-Control-Allow-Headers",
-//     "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+//     "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers, auth-token"
 //   );
 //   res.setHeader("Access-Control-Allow-Credentials", true);
 //   res.setHeader("Access-Control-Allow-Private-Network", true);
