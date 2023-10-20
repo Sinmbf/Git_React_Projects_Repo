@@ -8,7 +8,7 @@ const cors = require("cors");
 // To fix the cors issue
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "https://inotebook-frontend-ejsg.onrender.com",
     credentials: true,
   })
 );
