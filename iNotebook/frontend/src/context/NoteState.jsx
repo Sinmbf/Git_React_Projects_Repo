@@ -4,7 +4,7 @@ import NoteContext from "./NoteContext";
 
 const NoteState = ({ children }) => {
   const [notes, setNotes] = useState([]);
-  const host = "http://localhost:5000/api/note";
+  const host = "https://inotebook-backend-x7v4.onrender.com/api/note";
   // API Call
 
   // Helper function to fetch all notes
