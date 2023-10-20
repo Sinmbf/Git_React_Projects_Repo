@@ -51,7 +51,7 @@ const SignUp = ({ displayAlert }) => {
     });
   };
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: "3.5rem", padding: "5em" }}>
       <div className="row justify-content-center">
         <div className="text-center text-light">
           <h2 className="title">Create A New Account</h2>
@@ -148,7 +148,7 @@ const SignUp = ({ displayAlert }) => {
           <button
             disabled={credentials.password !== credentials.cpassword}
             type="submit"
-            className="btn btn-primary"
+            className="btn btn-primary w-100"
           >
             Sign Up
           </button>

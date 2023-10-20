@@ -10,7 +10,10 @@ const NavBar = ({ displayAlert }) => {
     navigate("/login");
   };
   return (
-    <nav className="navbar navbar-expand-lg bg-black" data-bs-theme="dark">
+    <nav
+      className="navbar navbar-expand-lg bg-black fixed-top"
+      data-bs-theme="dark"
+    >
       <div className="container-fluid">
         <NavLink className="navbar-brand" to="/">
           i<span className="text-danger">Notebook</span>

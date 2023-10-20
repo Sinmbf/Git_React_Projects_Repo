@@ -9,7 +9,7 @@ const NoteItem = (props) => {
     <div className="col-md-3 m-3">
       <div className="card h-100 text-bg-dark">
         <div className="card-body text-center">
-          <h5 className="card-title text-light" style={{ height: "3rem" }}>
+          <h5 className="card-title text-light mb-3" style={{ height: "3rem" }}>
             {props.title}
           </h5>
           <span
@@ -27,7 +27,12 @@ const NoteItem = (props) => {
         <div className="card-footer text-center p-3 fs-5">
           <i
             className="fa-solid fa-trash text-danger mx-2"
-            onClick={() => deleteNote(props._id)}
+            onClick={() => {
+              deleteNote(props._id);
+              setTimeout(() => {
+                props.displayAlert("Deleted the note", "danger");
+              }, 600);
+            }}
           ></i>
           <i
             className="fa-solid fa-pen-to-square text-success mx-2"

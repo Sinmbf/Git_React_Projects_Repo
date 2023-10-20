@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import NoteContext from "../context/NoteContext";
 
-const AddNote = () => {
-  // Get addNote funciton from the useContext
+const AddNote = ({ displayAlert }) => {
+  // Get addNote function from the useContext
   const context = useContext(NoteContext);
   const { createNote } = context;
   // State for notes
@@ -18,6 +19,7 @@ const AddNote = () => {
     const { title, description, tag } = note;
 
     createNote(title, description, tag);
+    displayAlert("New note added!", "success");
     setNote({ title: "", description: "", tag: "" });
   };
   const handleChange = (e) => {
@@ -43,6 +45,7 @@ const AddNote = () => {
           id="title"
           aria-describedby="titleHelp"
           minLength={3}
+          maxLength={25}
           required
           onChange={handleChange}
         />
@@ -52,7 +55,7 @@ const AddNote = () => {
         <label htmlFor="description" className="form-label">
           Description
         </label>
-        <input
+        <textarea
           value={note.description}
           name="description"
           type="text"
@@ -71,6 +74,7 @@ const AddNote = () => {
         </label>
         <input
           value={note.tag}
+          maxLength={25}
           name="tag"
           type="text"
           className="form-control"

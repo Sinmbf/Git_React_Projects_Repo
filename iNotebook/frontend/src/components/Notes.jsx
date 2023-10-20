@@ -17,15 +17,21 @@ const Notes = ({ displayAlert }) => {
     etag: "",
   });
   const btnRef = useRef();
+  const closeBtnRef = useRef();
   // Helper function to handle submit
   const handleSubmit = (e) => {
     e.preventDefault();
     const { id, etitle, edescription, etag } = note;
     updateNote(id, etitle, edescription, etag);
+    displayAlert("Note updated!", "success");
   };
   // Helper function to handle click
   const handleClick = () => {
     btnRef.current.click();
+  };
+  // Helper function to handle key down
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") closeBtnRef.current.click();
   };
   // Helper function to change note
   const changeNote = (selectedNote) => {
@@ -55,13 +61,13 @@ const Notes = ({ displayAlert }) => {
   }, []);
   return (
     <>
-      <div className="container">
+      <div className="container mt-5" style={{ padding: "5rem" }}>
         <div className="row justify-content-center">
           <div className="text-center text-light">
             <h2>Add Notes</h2>
           </div>
           {/* Add note */}
-          <AddNote />
+          <AddNote displayAlert={displayAlert} />
           {/* Update note */}
           <div>
             {/* Modal */}
@@ -88,6 +94,7 @@ const Notes = ({ displayAlert }) => {
                       className="btn-close"
                       data-bs-dismiss="modal"
                       aria-label="Close"
+                      ref={closeBtnRef}
                     />
                   </div>
                   <div className="modal-body">
@@ -110,6 +117,7 @@ const Notes = ({ displayAlert }) => {
                           minLength={3}
                           required
                           onChange={handleChange}
+                          onKeyDown={handleKeyDown}
                         />
                       </div>
                       {/* Description */}
@@ -120,7 +128,7 @@ const Notes = ({ displayAlert }) => {
                         >
                           Description
                         </label>
-                        <input
+                        <textarea
                           value={note.edescription}
                           name="edescription"
                           type="text"
@@ -144,6 +152,7 @@ const Notes = ({ displayAlert }) => {
                           className="form-control"
                           id="tag"
                           onChange={handleChange}
+                          onKeyDown={handleKeyDown}
                         />
                       </div>
                       <button
@@ -175,15 +184,28 @@ const Notes = ({ displayAlert }) => {
         </div>
         {/* User Notes */}
         <div className="row justify-content-center">
+          <div className="text-center text-light">
+            <h2>Your Notes</h2>
+          </div>
           {/* If no notes stored then display an alert */}
-          {notes?.length === 0 && (
-            <div className="text-center">
-              <Alert message="No notes stored" type="danger" />
-            </div>
-          )}
+          <div className="text-center">
+            {notes?.length === 0 ? (
+              <div className="alert alert-danger mt-5" role="alert">
+                <strong>No notes stored!</strong>
+              </div>
+            ) : (
+              <Alert message={""} type={""} />
+            )}
+          </div>
+
           {/*  If notes are stored then display them */}
           {notes.map((note) => (
-            <NoteItem key={note._id} {...note} changeNote={changeNote} />
+            <NoteItem
+              key={note._id}
+              {...note}
+              changeNote={changeNote}
+              displayAlert={displayAlert}
+            />
           ))}
         </div>
       </div>

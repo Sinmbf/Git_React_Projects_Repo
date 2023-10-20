@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from "prop-types";
-import { useState} from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Login = ({ displayAlert }) => {
@@ -48,7 +48,7 @@ const Login = ({ displayAlert }) => {
     });
   };
   return (
-    <div className="container">
+    <div className="container" style={{ marginTop: "3.5rem", padding: "5em" }}>
       <div className="row justify-content-center">
         <div className="text-center text-light">
           <h2>Login To Your Account</h2>
@@ -101,10 +101,11 @@ const Login = ({ displayAlert }) => {
               {error && error}
             </div>
           </div>
-
-          <button type="submit" className="btn btn-primary">
-            Login
-          </button>
+          <div className="text-center">
+            <button type="submit" className="btn btn-primary w-100">
+              Login
+            </button>
+          </div>
         </form>
       </div>
     </div>
